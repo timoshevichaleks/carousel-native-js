@@ -58,7 +58,8 @@ body {
 .slide-image {
   min-width: 100%;
   min-height: 100%;
-  background-position: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .active {
