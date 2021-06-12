@@ -15,13 +15,13 @@ body {
 
   div {
     text-decoration: none;
-    
+
     @media (max-width: 900px) {
       text-decoration: underline;
 
       &:hover,
       &:focus {
-        color: yellow
+        color: yellow;
       }
     }
   }
@@ -32,23 +32,23 @@ body {
 
       &:hover,
       &:focus {
-        color: yellow
+        color: yellow;
       }
     }
   }
-    @media (min-width: 901px) {
-      &:hover,
-      &:focus {
-        color: yellow
-      }
+  @media (min-width: 901px) {
+    &:hover,
+    &:focus {
+      color: yellow;
     }
+  }
   @media (max-width: 600px) {
     a {
       text-decoration: underline;
 
       &:hover,
       &:focus {
-        color: yellow
+        color: yellow;
       }
     }
   }
@@ -57,12 +57,12 @@ body {
 h1 {
   color: white;
 
-      @media (min-width: 901px) {
-      &:hover,
-      &:focus {
-        color: yellow
-      }
+  @media (min-width: 901px) {
+    &:hover,
+    &:focus {
+      color: yellow;
     }
+  }
 
   @media (min-width: 601px) {
     color: green;
@@ -88,12 +88,12 @@ h2 {
 
 h3 {
   color: white;
-    @media (min-width: 701px) {
-      &:hover,
-      &:focus {
-        color: yellow
-      }
+  @media (min-width: 701px) {
+    &:hover,
+    &:focus {
+      color: yellow;
     }
+  }
 
   @media (min-width: 901px) {
     color: green;
@@ -129,4 +129,3 @@ h4 {
     color: red;
   }
 }
-

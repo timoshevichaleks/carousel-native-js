@@ -1,22 +1,45 @@
-function Carousel(p) {
-  let settings = {... {
-      containerID: '#carousel',
-      interval: 5000,
-      isPlaying: true,
-      slideID: '.slide'
-    },
-    ...p
+class Carousel {
+  constructor(p) {
+    let settings = {... {
+        containerID: '#carousel',
+        interval: 5000,
+        isPlaying: true,
+        slideID: '.slide'
+      },
+      ...p
+    };
+
+    this.block_controls = document.createElement('div');
+    this.container = document.querySelector(settings.containerID);
+    this.slides = this.container.querySelectorAll(settings.slideID);
+    this.interval = settings.interval;
+    this.isPlaying = settings.isPlaying;
   };
+  // заменили _initConfig на Spread оператор
+  // _initConfig(objectParams) {
+  //   const defaultSettings = {
+  //     containerID: '#carousel',
+  //     interval: 5000,
+  //     isPlaying: true,
+  //     slideID: '.slide'
+  //   };
+  //   if (typeof objectParams !== 'undefined') {
+  //     defaultSettings.containerID = objectParams.containerID || defaultSettings.containerID;
+  //     defaultSettings.interval = objectParams.interval || defaultSettings.interval;
+  //     defaultSettings.slideID = objectParams.slideID || defaultSettings.slideID;
+  //     defaultSettings.slideID = objectParams.slideID || defaultSettings.slideID;
+  //   };
 
-  this.block_controls = document.createElement('div');
-  this.container = document.querySelector(settings.containerID);
-  this.slides = this.container.querySelectorAll(settings.slideID);
-  // this.slide = this.container.querySelector('.slide');
-  this.isPlaying = settings.isPlaying;
-  this.interval = settings.interval;
-}
-
-Carousel.prototype = {
+  //   return defaultSettings;
+  // }
+  // let settings = {... {
+  //   containerID: '#carousel',
+  //   interval: 5000,
+  //   isPlaying: true,
+  //   slideID: '.slide'
+  // },
+  // ...p
+  // };
 
   _initProps() {
     this.slidesCount = this.slides.length;
@@ -29,12 +52,12 @@ Carousel.prototype = {
     this.FA_PLAY = '<i class="far fa-play-circle"></i>';
     this.FA_PREV = '<i class="fas fa-angle-left"></i>';
     this.FA_NEXT = '<i class="fas fa-angle-right"></i>';
-  },
+  };
 
   _initBlockControls() {
     this.block_controls.setAttribute('class', 'block-controls');
-    this.container.appendChild(this.block_controls);
-  },
+    this.container.append(this.block_controls);
+  }
 
   _initControls() {
     const controls = document.createElement('div');
@@ -58,7 +81,7 @@ Carousel.prototype = {
     this.playIcon = this.container.querySelector('#fa-play-icon');
 
     this.isPlaying ? this.pauseIcon.style.opacity = 1 : this.playIcon.style.opacity = 1;
-  },
+  }
 
   _initIndicators() {
     const indicators = document.createElement('ol');
@@ -70,15 +93,15 @@ Carousel.prototype = {
       indicator.setAttribute('class', 'indicator');
       indicator.dataset.slideTo = `${i}`;
       if (i === 0) indicator.classList.add('active');
-      indicators.appendChild(indicator);
+      indicators.append(indicator);
     }
 
-    this.block_controls.appendChild(indicators);
+    this.block_controls.append(indicators);
 
     this.indContainer = this.container.querySelector(
       '.indicators');
     this.indItems = this.indContainer.querySelectorAll('.indicator');
-  },
+  }
 
   _initListeners() {
     // this.pauseButton.addEventListener('click', () => this.pausePlay()); // Возвращаем контекс через стрелочную функцию
@@ -89,7 +112,7 @@ Carousel.prototype = {
     document.addEventListener('keydown', this.pressKey.bind(this));
     this.container.addEventListener('mouseenter', this._pause.bind(this));
     this.container.addEventListener('mouseleave', this._play.bind(this));
-  },
+  }
 
   _gotoSlide(n) {
     this.slides[this.currentSlide].classList.toggle('active');
@@ -97,16 +120,16 @@ Carousel.prototype = {
     this.currentSlide = (n + this.slidesCount) % this.slidesCount;
     this.indItems[this.currentSlide].classList.toggle('active');
     this.slides[this.currentSlide].classList.toggle('active');
-  },
+  }
 
   _gotoNext() {
     // console.log(this);
     this._gotoSlide(this.currentSlide + 1);
-  },
+  }
 
   _gotoPrev() {
     this._gotoSlide(this.currentSlide - 1);
-  },
+  }
 
   _pause() {
     if (this.isPlaying) {
@@ -115,7 +138,7 @@ Carousel.prototype = {
       clearInterval(this.timerID);
       this.isPlaying = false;
     }
-  },
+  }
 
   _play() {
     if (!this.isPlaying) {
@@ -124,7 +147,7 @@ Carousel.prototype = {
       this.timerID = setInterval(() => this._gotoNext(), this.interval);
       this.isPlaying = true;
     }
-  },
+  }
 
   _indicate(e) {
     const target = e.target;
@@ -133,29 +156,29 @@ Carousel.prototype = {
       this._pause();
       this._gotoSlide(+target.dataset.slideTo);
     }
-  },
+  }
 
   pausePlay() {
     // console.log(this);
     if (this.isPlaying) this._pause();
     else this._play();
-  },
+  }
 
   next() {
     this._pause();
     this._gotoNext();
-  },
+  }
 
   prev() {
     this._pause();
     this._gotoPrev();
-  },
+  }
 
   pressKey(e) {
     if (e.code === this.CODE_LEFT_ARROW) this.prev();
     if (e.code === this.CODE_RIGHT_ARROW) this.next();
     if (e.code === this.CODE_SPACE) this.pausePlay();
-  },
+  }
 
   init() {
     this._initProps();
@@ -164,32 +187,6 @@ Carousel.prototype = {
     this._initIndicators();
     this._initListeners();
 
-    // this.timerID = setInterval(this._gotoNext, this.interval); // Восстанавливаем контекс через apply
     if (this.isPlaying) this.timerID = setInterval(() => this._gotoNext(), this.interval);
   }
-};
-
-function SwipeCarousel() {
-  Carousel.apply(this, arguments)
-};
-
-SwipeCarousel.prototype = Object.create(Carousel.prototype);
-SwipeCarousel.prototype.constructor = SwipeCarousel;
-
-SwipeCarousel.prototype._initListeners = function() {
-  Carousel.prototype._initListeners.apply(this);
-  this.container.addEventListener('touchstart', this._swipeStart.bind(this));
-  this.container.addEventListener('touchend', this._swipeEnd.bind(this));
-};
-
-SwipeCarousel.prototype._swipeStart = function(e) {
-  this.swipeStartX = e.changedTouches[0].pageX;
-};
-
-SwipeCarousel.prototype._swipeEnd = function(e) {
-  this.swipeEndX = e.changedTouches[0].pageX;
-  // if (this.swipeStartX - this.swipeEndX > 100) this.next();
-  this.swipeStartX - this.swipeEndX > 100 && this.next();
-  // if (this.swipeStartX - this.swipeEndX < -100) this.prev();
-  this.swipeStartX - this.swipeEndX < -100 && this.prev();
 };

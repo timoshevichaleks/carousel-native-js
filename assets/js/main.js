@@ -1,4 +1,8 @@
-const carousel = new Carousel();
+const carousel = new SwipeCarousel({
+  // containerID: '#mycarousel',
+  // slideID: '.myslide',
+  // isPlaying: false,
+  interval: 2000
+});
 
-console.log(carousel);
-carousel.protoMethod();
+carousel.init();
