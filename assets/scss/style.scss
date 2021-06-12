@@ -1,6 +1,10 @@
-// @import "common";
+@import "skin";
+@import "variables";
 //
-// @import "carousel/carousel";
-// @import "carousel/slides";
-// @import "carousel/controls";
-// @import "carousel/indicators";
+@import "common";
+//
+@import "carousel/carousel";
+@import "carousel/slides";
+@import "carousel/controls";
+@import "carousel/pause";
+@import "carousel/indicators";

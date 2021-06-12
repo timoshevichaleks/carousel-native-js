@@ -50,8 +50,8 @@ class Carousel {
     this.CODE_SPACE = 'Space';
     this.CODE_LEFT_ARROW = 'ArrowLeft';
     this.CODE_RIGHT_ARROW = 'ArrowRight';
-    this.FA_PAUSE = '<i class="far fa-pause-circle fa-5x"></i>';
-    this.FA_PLAY = '<i class="far fa-play-circle fa-5x"></i>';
+    this.FA_PAUSE = '<i class="far fa-pause-circle fa-8x"></i>';
+    this.FA_PLAY = '<i class="far fa-play-circle fa-8x"></i>';
     this.FA_PREV = '<i class="fas fa-angle-left fa-3x"></i>';
     this.FA_NEXT = '<i class="fas fa-angle-right fa-3x"></i>';
   };
@@ -136,8 +136,8 @@ class Carousel {
     this.nextButton.addEventListener('click', this.next.bind(this));
     this.indContainer.addEventListener('click', this._indicate.bind(this));
     document.addEventListener('keydown', this.pressKey.bind(this));
-    // this.container.addEventListener('mouseenter', this._pause.bind(this));
-    // this.container.addEventListener('mouseleave', this._play.bind(this));
+    this.container.addEventListener('mouseenter', this._pause.bind(this));
+    this.container.addEventListener('mouseleave', this._play.bind(this));
   }
 
   _gotoSlide(n) {

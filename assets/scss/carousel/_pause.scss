@@ -1,0 +1,27 @@
+.block-pause {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+
+  transition: 0.5s;
+  transform: translateX(-50%);
+
+  opacity: 0;
+  .control-pause {
+    position: relative;
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
+
+      opacity: 0;
+      color: rgba($color-light, 0.5);
+    }
+  }
+  &:hover {
+    opacity: 1;
+  }
+}
