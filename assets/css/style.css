@@ -3,21 +3,21 @@ body {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
-
-/*
-essential styles:
-these make the slideshow work
-*/
+.carousel {
+  position: relative;
+}
 
 .slides {
   position: relative;
-  height: 150px;
+  height: 100vh;
   padding: 0px;
   margin: 0px;
   list-style-type: none;
 }
 
 .slide {
+  display: flex;
+  justify-content: center;
   position: absolute;
   left: 0px;
   top: 0px;
@@ -26,6 +26,13 @@ these make the slideshow work
   opacity: 0;
   z-index: -999;
   transition: opacity 1s;
+}
+
+.slide-title {
+  font-size: 24px;
+  display: flex;
+  align-items: flex-end;
+  margin: 0 0 20px 0;
 }
 
 .active {
@@ -40,7 +47,6 @@ just for appearance; change whatever you want
 */
 
 .slide {
-  font-size: 40px;
   padding: 40px;
   box-sizing: border-box;
   background: #333;
@@ -69,31 +75,57 @@ just for appearance; change whatever you want
 
 .block-controls {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.indicators,
 .controls {
   display: flex;
-  gap: 10px;
-  padding: 20px;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
 }
 
-.indicator,
-.control {
-  background-color: #ccc;
+.block-indicators {
+  position: absolute;
+  display: flex;
+  bottom: 20px;
+  justify-content: center;
+  width: 100%;
+}
+
+.indicators {
+  display: flex;
+  gap: 10px;
+}
+
+.indicator {
   user-select: none;
   cursor: pointer;
-  height: 40px;
-  min-width: 40px;
   display: flex;
+  min-height: 20px;
+  min-width: 20px;
+  border-radius: 50%;
+  border: 2px solid white;
+  z-index: 10;
+}
+
+.control {
+  user-select: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  height: 100%;
+  padding: 0 40px;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 
 .indicator.active {
-  background-color: red;
+  box-shadow: 0 0 10px white;
 }
 
 .indicators {
@@ -112,4 +144,12 @@ just for appearance; change whatever you want
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0;
+}
+
+.block-pause {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
 }
