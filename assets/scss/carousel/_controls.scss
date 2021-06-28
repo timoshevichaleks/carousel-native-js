@@ -27,6 +27,10 @@
       transition: 0.5s;
 
       color: rgba($color-light, 0.5);
+
+      @include xs {
+        padding: 0 20px;
+      }
       &-prev {
         &:hover {
           color: rgba($color-light, 0.8);

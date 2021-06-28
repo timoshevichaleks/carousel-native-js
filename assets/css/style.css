@@ -1,3 +1,9 @@
+/* xl */
+/* lg */
+/* md */
+/* sm */
+/* xs */
+/* xx */
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -200,4 +206,10 @@ body {
 .active {
   -webkit-box-shadow: 0 0 10px white;
           box-shadow: 0 0 10px white;
+}
+
+@media (max-width: 575.8px) {
+  .block-controls .controls .control {
+    padding: 0 20px;
+  }
 }
